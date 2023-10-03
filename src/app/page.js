@@ -1,10 +1,7 @@
 import Image from "next/image";
 import {
-  Navbar,
   Product,
-  Footer,
-  FooterBanner,
-  HeroBanner,
+  Banner,
   Layout,
   Cart,
 } from "@/_components";
@@ -18,29 +15,19 @@ export default async function Home() {
   console.log("banner from page", banner);
   console.log("products from page", products);
   return (
-    <main className="">
+    <main className="m-auto w-full max-w-[1400px]">
       {banner?.saleTime.start <= today && banner?.saleTime.end >= today && (
-        <HeroBanner banner={banner} />
+        <Banner banner={banner} />
       )}
       <div className="products-heading">
         <h2>Best selling products</h2>
         <p>Speakers of many variations</p>
       </div>
-      <div className="products-container">
+      <div className="flex flex-wrap justify-center gap-6 mt-5 w-full">
         {products?.map((product) => (
-          <div key={product._id}>
-            <div>{product.name}</div>
-            {/* <div>{product.details}</div> */}
-            <Image
-              src={urlForImage(product.images[0]).url()}
-              alt={product.name}
-              height={100}
-              width={100}
-            />
-          </div>
+          <Product key={product._id} product={product} />
         ))}
       </div>
-      <FooterBanner />
     </main>
   );
 }
