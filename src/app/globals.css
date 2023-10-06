@@ -36,9 +36,9 @@ a {
   .marquee {
     @apply relative h-[400px] w-full overflow-x-hidden;
   }
-  .track {
+  /* .track {
     @apply absolute whitespace-nowrap will-change-transform w-[550%] md:w-[180%] animate-marquee;
-  }
+  } */
   span.text-red {
     @apply ml-[6px] text-[#f02d34];
   }
@@ -197,12 +197,6 @@ a {
   }
   .item-desc .bottom {
     @apply mt-8 md:mt-16;
-  }
-  .flex h5 {
-    @apply text-base md:text-2xl text-[#324d67];
-  }
-  .flex h4 {
-    @apply text-base md:text-xl text-black;
   }
   .total {
     @apply flex justify-between;

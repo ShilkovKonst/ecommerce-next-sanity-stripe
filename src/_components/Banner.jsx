@@ -33,9 +33,9 @@ const Banner = ({
           />
           <div className="">
             <p className="text-lg">{description.preheader}</p>
-            <p className="font-extrabold text-5xl lg:text-6xl">
+            <h2 className="font-extrabold text-5xl lg:text-6xl">
               {description.header}
-            </p>
+            </h2>
             <p className="text-lg">{description.description}</p>
           </div>
         </div>

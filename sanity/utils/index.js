@@ -1,12 +1,25 @@
 const { groq } = require("next-sanity");
 const { client } = require("../lib/client");
 
-const revalidate = 0
+const revalidate = 0;
 
 async function getProducts() {
   const query = groq`*[_type == 'products'] {
     _id, name, images, slug, price, details
   }`;
+  const res = await client.fetch({
+    query: query,
+    config: {
+      next: {
+        revalidate: 0,
+      },
+    },
+  });
+  return res;
+}
+
+async function getOneProduct(slug) {
+  const query = groq`*[_type == 'products' && slug.current == '${slug}'][0]`;
   const res = await client.fetch({
     query: query,
     config: {
@@ -33,4 +46,4 @@ async function getHeadBanner() {
   return res;
 }
 
-export { getProducts, getHeadBanner };
+export { getProducts, getOneProduct, getHeadBanner };

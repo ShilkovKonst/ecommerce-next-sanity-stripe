@@ -34,8 +34,10 @@ export const products = {
         {
             name: 'details',
             title: 'Details',
-            type: 'array',
-            of: [{type: 'block'}]
+            type: "object",
+            fields: [
+              { name: "description", type: "string", title: "Description" },
+            ],
         }
         
     ]
