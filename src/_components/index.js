@@ -3,3 +3,4 @@ export { default as Navbar } from "@/_components/Navbar";
 export { default as Cart } from "@/_components/Cart";
 export { default as Banner } from "@/_components/Banner";
 export { default as Product } from "@/_components/Product";
+export { default as ProductImages } from "@/_components/ProductImages";
