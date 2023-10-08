@@ -4,7 +4,7 @@ import React, { useEffect } from "react";
 import { AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
 
 const QntyChanger = ({ product, cart }) => {
-  const { qnty, setQnty, decreaseQnty, increaseQnty, incQntyCart, decQntyCart } =
+  const { qnty, setQnty, decreaseQnty, increaseQnty, changeQntyCart } =
     useStateContext();
 
 useEffect(() => {
@@ -17,7 +17,7 @@ useEffect(() => {
       <p className="flex justify-between items-center border border-solid border-[gray] h-auto w-auto">
         <span
           className="flex justify-center items-center border-r border-solid border-l-[gray] text-xl px-2 py-3 cursor-pointer text-[#f02d34]"
-          onClick={!cart ? decreaseQnty : () => decQntyCart(product)}
+          onClick={!cart ? decreaseQnty : () => changeQntyCart(product, 'dec')}
         >
           <AiOutlineMinus />
         </span>
@@ -26,7 +26,7 @@ useEffect(() => {
         </span>
         <span
           className="flex justify-center items-center border-l border-solid border-r-[gray] text-xl px-2 py-3 cursor-pointer text-[#31a831]"
-          onClick={!cart ? increaseQnty : () => incQntyCart(product)}
+          onClick={!cart ? increaseQnty : () => changeQntyCart(product, 'inc')}
         >
           <AiOutlinePlus />
         </span>

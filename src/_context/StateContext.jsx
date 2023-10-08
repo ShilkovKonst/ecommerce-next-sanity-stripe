@@ -13,42 +13,45 @@ export const StateContext = ({ children }) => {
   const [qnty, setQnty] = useState(1);
 
   const increaseQnty = () => {
-    setQnty((prev) => prev + 1); 
+    setQnty((prev) => prev + 1);
   };
   const decreaseQnty = () => {
     setQnty((prev) => (prev == 1 ? 1 : prev - 1));
   };
 
-  const incQntyCart = (pr) => {
+  const changeQntyCart = (pr, val) => {
     const newCartItems = cartItems.map((item) => {
       if (item._id === pr._id)
         return {
           ...item,
-          quantity: item.quantity + 1,
+          quantity:
+            val == "inc"
+              ? item.quantity + 1
+              : val == "dec" && item.quantity > 1
+              ? item.quantity - 1
+              : 1,
         };
       else return item;
     });
-    setCartItems(newCartItems)
-  }
+    setCartItems(newCartItems);
+  };
 
-  const decQntyCart = (pr) => {
-    const newCartItems = cartItems.map((item) => {
-      if (item._id === pr._id)
-        return {
-          ...item,
-          quantity: item.quantity == 1 ? 1 : item.quantity - 1,
-        };
-      else return item;
-    });
-    setCartItems(newCartItems)
-  }
+  // const decQntyCart = (pr) => {
+  //   const newCartItems = cartItems.map((item) => {
+  //     if (item._id === pr._id)
+  //       return {
+  //         ...item,
+  //         quantity: item.quantity == 1 ? 1 : item.quantity - 1,
+  //       };
+  //     else return item;
+  //   });
+  //   setCartItems(newCartItems)
+  // }
 
   const removeFromCart = (pr) => {
-    const index = cartItems.findIndex(item => item._id === pr._id)
-    // const newCartItems = cartItems.slice(0, index).concat(cartItems.slice(index+1))
-    const newCartItems = cartItems.filter(item => item._id !== pr._id)
-    setCartItems(newCartItems)
-  }
+    const newCartItems = cartItems.filter((item) => item._id !== pr._id);
+    setCartItems(newCartItems);
+  };
 
   const addToCart = (qnty) => {
     const checkProductCart = cartItems.some((item) => item._id === product._id);
@@ -72,7 +75,8 @@ export const StateContext = ({ children }) => {
 
   useEffect(() => {
     setTotalQnty(cartItems.length);
-    cartItems.length > 0 && setTotalPrice(cartItems.reduce((p, c) => p + c.price*c.quantity, 0));
+    cartItems.length > 0 &&
+      setTotalPrice(cartItems.reduce((p, c) => p + c.price * c.quantity, 0));
   }, [cartItems]);
 
   return (
@@ -88,11 +92,11 @@ export const StateContext = ({ children }) => {
         qnty,
         setQnty,
         increaseQnty,
-        incQntyCart,
         decreaseQnty,
-        decQntyCart,
+        // decQntyCart,
         addToCart,
-        removeFromCart
+        changeQntyCart,
+        removeFromCart,
       }}
     >
       {children}

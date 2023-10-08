@@ -2,7 +2,7 @@
 import { useStateContext } from "@/_context/StateContext";
 import React, { useEffect } from "react";
 import { AiFillStar, AiOutlineMinus, AiOutlinePlus } from "react-icons/ai";
-import QntyChanger from "./QntyChanger";
+import { QntyChanger } from ".";
 
 const ProductDesc = ({ product }) => {
   const { setProduct, qnty, addToCart } = useStateContext();
