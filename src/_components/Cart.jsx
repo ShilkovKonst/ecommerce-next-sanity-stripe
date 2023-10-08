@@ -10,11 +10,38 @@ import {
 } from "react-icons/ai";
 import { urlForImage } from "../../sanity/lib/image";
 import QntyChanger from "./QntyChanger";
+import { stripePromise } from "../../stripe/lib/client";
+import toast from "react-hot-toast";
 
 const Cart = () => {
   const cartRef = useRef();
-  const { showCart, setShowCart, totalQnty, totalPrice, cartItems, removeFromCart } =
-    useStateContext();
+  const {
+    showCart,
+    setShowCart,
+    totalQnty,
+    totalPrice,
+    cartItems,
+    removeFromCart,
+  } = useStateContext();
+
+  const handleCheckout = async () => {
+    const stripe = await stripePromise;
+    const response = await fetch('/api/stripe', {
+      method:"POST",
+      headers: {
+        'Content-Type': 'Application/json'
+      },
+      body: JSON.stringify(cartItems)
+    })
+
+    if (response.statusCode === 500) return;
+    else {
+      toast.loading("Redirecting...");
+      const session = await response.json()
+      console.log(session)
+      // stripe.redirectToCheckout({ sessionId: session.id });
+    }
+  };
 
   return (
     <>
@@ -89,6 +116,7 @@ const Cart = () => {
                     <button
                       className="w-full max-w-[400px] p-3 rounded-2xl border-none text-xl mt-10 uppercase bg-[#f02d34] text-white cursor-pointer transform scale-100 hover:scale-105 transition duration-500 ease-in-out"
                       type="button"
+                      onClick={handleCheckout}
                     >
                       Pay with Stripe
                     </button>
