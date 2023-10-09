@@ -71,7 +71,7 @@ const Cart = () => {
     <>
       {showCart ? (
         <div className="w-screen bg-[#00000080] fixed right-0 top-0 z-[100] transition-all duration-1000 ease-in-out">
-          <div className="h-screen w-[415px] md:w-[600px] bg-white float-right p-1 md:px-10 md:py-3 relative">
+          <div className="h-screen w-[375px] md:w-[600px] bg-white float-right p-1 md:px-10 md:py-3 relative">
             <button
               className="flex justify-between items-center w-full text-lg font-medium cursor-pointer gap-1 mt-9 md:mt-0 border-none bg-transparent"
               type="button"
