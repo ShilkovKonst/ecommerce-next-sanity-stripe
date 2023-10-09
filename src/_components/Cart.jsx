@@ -26,20 +26,44 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     const stripe = await stripePromise;
-    const response = await fetch('/api/stripe', {
-      method:"POST",
+    const body = cartItems.map((item) => {
+      const img = item.images[0].asset._ref;
+      const newImage = img
+        .replace("image-", "https://cdn.sanity.io/images/jrhc13ib/production/")
+        .replace("-webp", ".webp");
+      return {
+        price_data: {
+          currency: "eur",
+          product_data: {
+            name: item.name,
+            images: [newImage],
+          },
+          unit_amount: item.price * 100,
+        },
+        adjustable_quantity: {
+          enabled: true,
+          minimum: 1,
+        },
+        quantity: item.quantity,
+      };
+    });
+    const response = await fetch("/api/stripe", {
+      method: "POST",
       headers: {
-        'Content-Type': 'Application/json'
+        "Content-Type": "application/json",
       },
-      body: JSON.stringify(cartItems)
-    })
-
-    if (response.statusCode === 500) return;
-    else {
-      toast.loading("Redirecting...");
-      const session = await response.json()
-      console.log(session)
-      // stripe.redirectToCheckout({ sessionId: session.id });
+      body: JSON.stringify(body),
+    });
+    if (!response.ok) {
+      console.error("Error response from server:", response.statusText);
+    } else {
+      try {
+        const session = await response.json();
+        toast.loading("Redirecting...");
+        stripe.redirectToCheckout({ sessionId: session.id });
+      } catch (error) {
+        console.error("Error parsing JSON response:", error);
+      }
     }
   };
 

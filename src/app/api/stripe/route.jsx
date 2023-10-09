@@ -3,32 +3,27 @@ import { stripeClient } from "../../../../stripe/lib/client";
 
 export async function POST(req) {
   try {
+    const body = await req.json();
     const params = {
       submit_type: "pay",
       mode: "payment",
-      payment_method_types: ["card"],
+      payment_method_types: ["card", "paypal"],
       billing_address_collection: "auto",
       shipping_options: [
         { shipping_rate: "shr_1NyyUmApfc7RZnhBDEFaTZJ0" },
         { shipping_rate: "shr_1NyyeeApfc7RZnhBUc1uKMIM" },
       ],
-      line_items: [
-        {
-          // Provide the exact Price ID (for example, pr_1234) of the product you want to sell
-          price: 99,
-          quantity: 1,
-        },
-      ],
-      mode: "payment",
-      success_url: `/success`,
-      cancel_url: `/`,
+      line_items: body,
+      success_url: `http://localhost:3000/success`,
+      cancel_url: `http://localhost:3000/`,
       automatic_tax: { enabled: true },
     };
     // Create Checkout Sessions from body params.
     const session = await stripeClient.checkout.sessions.create(params);
-    console.log(session)
-    return NextResponse(session);
+    return new NextResponse(JSON.stringify(session));
   } catch (error) {
-    return NextResponse.json({ statusCode: 500, message: error.message });
+    return new NextResponse(
+      JSON.stringify({ statusCode: 500, message: error.message })
+    );
   }
 }
