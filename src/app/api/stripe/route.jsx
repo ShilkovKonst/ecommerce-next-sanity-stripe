@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import { stripeClient } from "../../../../stripe/lib/client";
+import { baseUrl } from "../../../../stripe/env";
 
 export async function POST(req) {
   try {
@@ -14,8 +15,8 @@ export async function POST(req) {
         { shipping_rate: "shr_1NyyeeApfc7RZnhBUc1uKMIM" },
       ],
       line_items: body,
-      success_url: `http://localhost:3000/success`,
-      cancel_url: `http://localhost:3000/`,
+      success_url: `${baseUrl}success`,
+      cancel_url: `${baseUrl}`,
       automatic_tax: { enabled: true },
     };
     // Create Checkout Sessions from body params.
