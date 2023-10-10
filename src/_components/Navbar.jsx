@@ -6,7 +6,6 @@ import React from "react";
 import Cart from "./Cart";
 
 const Navbar = () => {
-  console.log(process.env.NODE_ENV)
   return (
     <nav className="flex justify-between p-3 sticky top-0 z-10">
       <Link href="/" className="flex gap-3 items-center justify-between">
