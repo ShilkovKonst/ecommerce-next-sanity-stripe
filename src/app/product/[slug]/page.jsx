@@ -2,14 +2,14 @@ import React from "react";
 import { getOneProduct, getProducts } from "../../../../sanity/utils";
 import { Product, ProductImages, ProductDesc } from "@/_components";
 
-const ProductDetails = async ({ params }) => {
+const ProductPage = async ({ params }) => {
   const product = await getOneProduct(params.slug);
-  const { images, name, price, details } = product;
+  const { images } = product;
 
   const products = await getProducts();
 
   return (
-    <main className="text-[#324d67] m-auto w-full max-w-[1280px]">
+    <main className="text-darkwood m-auto w-full max-w-[1280px] mt-5">
       <div className="flex flex-wrap md:flex-nowrap gap-10 mx-10 xl:mx-0">
         <ProductImages images={images} />
         <ProductDesc product={product} />
@@ -29,4 +29,4 @@ const ProductDetails = async ({ params }) => {
   );
 };
 
-export default ProductDetails;
+export default ProductPage;

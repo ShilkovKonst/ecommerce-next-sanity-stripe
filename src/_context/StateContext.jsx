@@ -12,11 +12,10 @@ export const StateContext = ({ children }) => {
   const [totalQnty, setTotalQnty] = useState(cartItems.length);
   const [qnty, setQnty] = useState(1);
 
-  const increaseQnty = () => {
-    setQnty((prev) => prev + 1);
-  };
-  const decreaseQnty = () => {
-    setQnty((prev) => (prev == 1 ? 1 : prev - 1));
+  const changeQnty = (val) => {
+    setQnty((prev) =>
+      val == "inc" ? prev + 1 : val == "dec" && prev > 1 ? prev - 1 : 1
+    );
   };
 
   const changeQntyCart = (pr, val) => {
@@ -35,18 +34,6 @@ export const StateContext = ({ children }) => {
     });
     setCartItems(newCartItems);
   };
-
-  // const decQntyCart = (pr) => {
-  //   const newCartItems = cartItems.map((item) => {
-  //     if (item._id === pr._id)
-  //       return {
-  //         ...item,
-  //         quantity: item.quantity == 1 ? 1 : item.quantity - 1,
-  //       };
-  //     else return item;
-  //   });
-  //   setCartItems(newCartItems)
-  // }
 
   const removeFromCart = (pr) => {
     const newCartItems = cartItems.filter((item) => item._id !== pr._id);
@@ -87,15 +74,16 @@ export const StateContext = ({ children }) => {
         showCart,
         setShowCart,
         cartItems,
+        setCartItems,
         totalPrice,
+        setTotalPrice,
         totalQnty,
+        setTotalQnty,
         qnty,
         setQnty,
-        increaseQnty,
-        decreaseQnty,
-        // decQntyCart,
-        addToCart,
+        changeQnty,
         changeQntyCart,
+        addToCart,
         removeFromCart,
       }}
     >

@@ -21,7 +21,7 @@ export async function POST(req) {
     };
     // Create Checkout Sessions from body params.
     const session = await stripeClient.checkout.sessions.create(params);
-    return new NextResponse(JSON.stringify(session));
+    return new NextResponse(JSON.stringify({id: session.id}));
   } catch (error) {
     return new NextResponse(
       JSON.stringify({ statusCode: 500, message: error.message })

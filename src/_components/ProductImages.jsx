@@ -10,7 +10,7 @@ const ProductImages = ({ images }) => {
     <div>
       <div className="w-[300px] md:w-[400px] rounded-2xl bg-[#ebebeb] transform scale-100 transition duration-500 ease-in-out">
         <Image
-          className="rounded-2xl bg-[#ebebeb] hover:bg-[#f02d34] w-[300px] md:w-[400px] h-[300px] md:h-[400px] cursor-pointer transition duration-300 ease-in-out"
+          className="rounded-2xl bg-beige hover:bg-lightwood w-[300px] md:w-[400px] h-[300px] md:h-[400px] cursor-pointer transition duration-300 ease-in-out"
           src={urlForImage(images[index]).url()}
           alt={`image ${index}`}
           width={300}
@@ -22,8 +22,8 @@ const ProductImages = ({ images }) => {
           <Image
             className={
               i == index
-                ? `rounded-lg w-[70px] h-[70px] cursor-pointer bg-[#f02d34]`
-                : `rounded-lg bg-[#ebebeb] w-[70px] h-[70px] cursor-pointer`
+                ? `rounded-lg w-[70px] h-[70px] cursor-pointer bg-lightwood`
+                : `rounded-lg bg-beige w-[70px] h-[70px] cursor-pointer`
             }
             key={i}
             src={urlForImage(image).url()}
