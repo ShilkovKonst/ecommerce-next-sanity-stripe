@@ -5,7 +5,7 @@ export default async function HomePage() {
   const products = await getProducts();
   const banner = await getHeadBanner();
   const today = new Date().toISOString().slice(0, 10);
-  console.log(banner)
+  
   return (
     <main className="m-auto w-full max-w-[1280px] mt-5">
       {banner?.saleTime.start <= today && banner?.saleTime.end >= today && (

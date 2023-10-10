@@ -6,7 +6,7 @@ import { AiOutlineDelete } from "react-icons/ai";
 import { urlForImage } from "../../sanity/lib/image";
 import Link from "next/link";
 
-const CartItemsList = ({ item, setShowCart }) => {
+const CartItem = ({ item, setShowCart, removeFromCart }) => {
   return (
     <div className="flex justify-between py-3 md:py-6">
       <Link
@@ -43,4 +43,4 @@ const CartItemsList = ({ item, setShowCart }) => {
   );
 };
 
-export default CartItemsList;
+export default CartItem;
