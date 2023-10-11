@@ -13,9 +13,6 @@ module.exports = {
       'lightwood': '#D2B48C',
       'beige': '#F5F5DC',
       'darkwood': '#8B4513',
-      'mint': '#98FB98',
-      'lavander': '#E6E6FA',
-      'navyblue': ' #000080',
       'darkgreen': ' #006400 ',
       'robin': '#ea1e4f'
     },
