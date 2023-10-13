@@ -8,9 +8,9 @@ export default async function HomePage() {
   
   return (
     <main className="m-auto w-full max-w-[1280px] mt-5">
-      {banner?.saleTime.start <= today && banner?.saleTime.end >= today && (
+      {/* {banner?.saleTime.start <= today && banner?.saleTime.end >= today && (
         <Banner banner={banner} />
-      )}
+      )} */}
       <div className="mx-10 xl:mx-0 my-0 text-center text-darkwood">
         <h3 className=" mt-10 text-3xl font-extrabold">
           Best selling products
